@@ -85,19 +85,19 @@ public class Driver {
                     switch (posicion) {
                         case "auxiliar":
                             efectividad = (((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios;
-                            new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos);
+                            jugadores.add(new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
                             break;
                         case "pasador":
                             efectividad = (((pases + fintas - errores) * 100) / (pases + fintas + errores)) + (aces * 100) / total_servicios;
-                            new Pasador(nombre, pais, errores, aces, total_servicios, efectividad, pases, fintas);
+                            jugadores.add(new Pasador(nombre, pais, errores, aces, total_servicios, efectividad, pases, fintas));
                             break;
                         case "libero":
                             efectividad = (((recibos - errores) * 100) / (recibos + errores)) + (aces * 100) / total_servicios;
-                            new Libero(nombre, pais, errores, aces, total_servicios, efectividad, recibos);
+                            jugadores.add(new Libero(nombre, pais, errores, aces, total_servicios, efectividad, recibos));
                             break;
                         case "opuesto":
                             efectividad = (((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios;
-                            new Opuesto(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos);
+                            jugadores.add(new Opuesto(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
                             break;
                     }
                 }
