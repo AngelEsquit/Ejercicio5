@@ -4,7 +4,7 @@ public class Pasador extends Jugador {
 
     public Pasador(String nombre, String pais, int errores, int aces, int total_servicios, float efectividad,
             int pases, int fintas) {
-        super(nombre, pais, errores, aces, total_servicios);
+        super(nombre, pais, errores, aces, total_servicios, efectividad);
         this.pases = pases;
         this.fintas = fintas;
     }

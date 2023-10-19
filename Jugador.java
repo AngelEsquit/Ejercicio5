@@ -6,7 +6,7 @@ public class Jugador {
     protected int total_servicios;
     protected float efectividad;
 
-    public Jugador(String nombre, String pais, int errores, int aces, int total_servicios) {
+    public Jugador(String nombre, String pais, int errores, int aces, int total_servicios, float efectividad) {
         this.nombre = nombre;
         this.pais = pais;
         this.errores = errores;

@@ -5,7 +5,7 @@ public class Auxiliar extends Jugador {
 
     public Auxiliar(String nombre, String pais, int errores, int aces, int total_servicios, float efectividad,
             int ataques, int bloqueos_efectivos, int bloqueos_fallidos) {
-        super(nombre, pais, errores, aces, total_servicios);
+        super(nombre, pais, errores, aces, total_servicios, efectividad);
         this.ataques = ataques;
         this.bloqueos_efectivos = bloqueos_efectivos;
         this.bloqueos_fallidos = bloqueos_fallidos;

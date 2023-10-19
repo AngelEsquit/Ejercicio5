@@ -6,11 +6,13 @@ import java.util.InputMismatchException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class Driver {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        DecimalFormat df = new DecimalFormat("#.######");
         ArrayList<Jugador> jugadores = new ArrayList<>();
         boolean salir = true;
         int opcion = 0;
@@ -28,7 +30,7 @@ public class Driver {
         int pases = 0;
         int fintas = 0;
         int recibos = 0;
-        float efectividad = 0;
+        float efectividad = 1;
         
         boolean primera_fila = true;
 
@@ -49,39 +51,51 @@ public class Driver {
                         switch (conteo) {
                             case 0: // Nombre
                                 nombre = datos;
+                                System.out.println(nombre);
                                 break;
                             case 1: // Posicion
                                 posicion = datos;
+                                System.out.println(posicion);
                                 break;
                             case 2: // Pais
                                 pais = datos;
+                                System.out.println(pais);
                                 break;
                             case 3: // Errores
                                 errores = Integer.parseInt(datos);
+                                System.out.println(errores);
                                 break;
                             case 4: // Aces
                                 aces = Integer.parseInt(datos);
+                                System.out.println(aces);
                                 break;
                             case 5: // Total servicios
                                 total_servicios = Integer.parseInt(datos);
+                                System.out.println(total_servicios);
                                 break;
                             case 6: // Ataques
                                 ataques = Integer.parseInt(datos);
+                                System.out.println(ataques);
                                 break;
                             case 7: // Bloqueos efectivos
                                 bloqueos_efectivos = Integer.parseInt(datos);
+                                System.out.println(bloqueos_efectivos);
                                 break;
                             case 8: // Bloqueos fallidos
                                 bloqueos_fallidos = Integer.parseInt(datos);
+                                System.out.println(bloqueos_fallidos);
                                 break;
                             case 9: // Pases
                                 pases = Integer.parseInt(datos);
+                                System.out.println(pases);
                                 break;
                             case 10: // Fintas
                                 fintas = Integer.parseInt(datos);
+                                System.out.println(fintas);
                                 break;
                             case 11: // Recibos
                                 recibos = Integer.parseInt(datos);
+                                System.out.println(recibos);
                                 break;
                             default:
                                 break;
@@ -109,7 +123,7 @@ public class Driver {
                 }
 
                 System.out.println(); // Salto de línea para cada fila
-                conteo = 0;
+                conteo = -1;
             }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo CSV: " + e.getMessage());
@@ -169,7 +183,9 @@ public class Driver {
         int n = 1;
         System.out.println("");
         for (Jugador jugador : jugadores) {
+            System.out.println(jugador.getEfectividad());
             System.out.println(n + ": " + jugador.toString());
+            n += 1;
         }
     }
 }
