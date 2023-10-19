@@ -6,18 +6,18 @@ import java.util.InputMismatchException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DecimalFormat;
 
 public class Driver {
     
     public static void main(String[] args) {
+        //Creación de variables e instancias para el funcionamiento del programa principal
         Scanner scanner = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat("#.######");
         ArrayList<Jugador> jugadores = new ArrayList<>();
         boolean salir = true;
         int opcion = 0;
         int conteo = -1;
-
+        
+        //Creación de variables para guardar los atributos de los jugadores
         String nombre = "";
         String posicion = "";
         String pais = "";
@@ -32,10 +32,11 @@ public class Driver {
         int recibos = 0;
         float efectividad = 1;
         
+        // Variable para saltar la primera fila de encabezados
         boolean primera_fila = true;
 
         String csvFilePath = "Jugadores.csv";
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) { // Lector de CSV
             String line;
             while ((line = csvReader.readLine()) != null) {
                 if (primera_fila) {
@@ -51,11 +52,9 @@ public class Driver {
                         switch (conteo) {
                             case 0: // Nombre
                                 nombre = datos;
-                                System.out.println(nombre);
                                 break;
                             case 1: // Posicion
                                 posicion = datos;
-                                System.out.println(posicion);
                                 break;
                             case 2: // Pais
                                 pais = datos;
@@ -63,39 +62,30 @@ public class Driver {
                                 break;
                             case 3: // Errores
                                 errores = Integer.parseInt(datos);
-                                System.out.println(errores);
                                 break;
                             case 4: // Aces
                                 aces = Integer.parseInt(datos);
-                                System.out.println(aces);
                                 break;
                             case 5: // Total servicios
                                 total_servicios = Integer.parseInt(datos);
-                                System.out.println(total_servicios);
                                 break;
                             case 6: // Ataques
                                 ataques = Integer.parseInt(datos);
-                                System.out.println(ataques);
                                 break;
                             case 7: // Bloqueos efectivos
                                 bloqueos_efectivos = Integer.parseInt(datos);
-                                System.out.println(bloqueos_efectivos);
                                 break;
                             case 8: // Bloqueos fallidos
                                 bloqueos_fallidos = Integer.parseInt(datos);
-                                System.out.println(bloqueos_fallidos);
                                 break;
                             case 9: // Pases
                                 pases = Integer.parseInt(datos);
-                                System.out.println(pases);
                                 break;
                             case 10: // Fintas
                                 fintas = Integer.parseInt(datos);
-                                System.out.println(fintas);
                                 break;
                             case 11: // Recibos
                                 recibos = Integer.parseInt(datos);
-                                System.out.println(recibos);
                                 break;
                             default:
                                 break;
@@ -103,7 +93,7 @@ public class Driver {
                     }
                 }
 
-                switch (posicion.toLowerCase()) {
+                switch (posicion.toLowerCase()) { // 
                     case "auxiliar":
                         efectividad = ((((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios);
                         jugadores.add(new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
@@ -122,14 +112,16 @@ public class Driver {
                         break;
                 }
 
+                Comparator<Jugador> comparadorEfectividad = Comparator.comparing(Jugador::getEfectividad);
+                Collections.sort(jugadores, Collections.reverseOrder(comparadorEfectividad));
                 System.out.println(); // Salto de línea para cada fila
                 conteo = -1;
             }
-        } catch (IOException e) {
+        } catch (IOException e) { // Catch para errores al leer el CSV
             System.err.println("Error al leer el archivo CSV: " + e.getMessage());
         }
 
-        while (salir) {
+        while (salir) { // Ciclo principal del programa
             printMenu();
 
             try {
@@ -142,17 +134,17 @@ public class Driver {
             }
 
             switch (opcion) {
-                case 1:
+                case 1: // Lista de jugadores inscritos
                     listaJugadores(jugadores);
                     break;
-                case 2:
+                case 2: // Mejores 3 líberos
                     break;
-                case 3:
+                case 3: // Cantidad de pasadores con más de un 80% de efectividad
                     System.out.println("// Lógica para la opción 3");
                     break;
-                case 4:
+                case 4: // Salir
                     salir = false;
-                    System.out.println("// Salir del bucle");
+                    System.out.println("Hasta pronto :)");
                     break;
                 case 0:
                     continue;
@@ -182,10 +174,21 @@ public class Driver {
     public static void listaJugadores(ArrayList<Jugador> jugadores) {
         int n = 1;
         System.out.println("");
+        System.out.println("");
         for (Jugador jugador : jugadores) {
-            System.out.println(jugador.getEfectividad());
             System.out.println(n + ": " + jugador.toString());
             n += 1;
+        }
+    }
+
+    public static void mejoresJugadores(ArrayList<Jugador> jugadores) {
+        int n = 1;
+        System.out.println("");
+        for (Jugador jugador : jugadores) {
+            if (jugador instanceof Libero) {
+                System.out.println(n + ": " + jugador.toString());
+                n += 1;
+            }
         }
     }
 }
