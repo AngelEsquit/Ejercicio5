@@ -12,13 +12,21 @@ public class Pasador extends Jugador {
     public int getPases() {
         return pases;
     }
+
     public void setPases(int pases) {
         this.pases = pases;
     }
+
     public int getFintas() {
         return fintas;
     }
+
     public void setFintas(int fintas) {
         this.fintas = fintas;
+    }
+
+    @Override
+    public String toString() {
+        return "Pasador - " + nombre + " - " + efectividad;
     }
 }

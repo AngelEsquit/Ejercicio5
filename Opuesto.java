@@ -1,9 +1,11 @@
-public class Opuesto {
+public class Opuesto extends Jugador {
     private int ataques;
     private int bloqueos_efectivos;
     private int bloqueos_fallidos;
 
-    public Opuesto(int ataques, int bloqueos_efectivos, int bloqueos_fallidos) {
+    public Opuesto(String nombre, String pais, int errores, int aces, int total_servicios, float efectividad,
+            int ataques, int bloqueos_efectivos, int bloqueos_fallidos) {
+        super(nombre, pais, errores, aces, total_servicios, efectividad);
         this.ataques = ataques;
         this.bloqueos_efectivos = bloqueos_efectivos;
         this.bloqueos_fallidos = bloqueos_fallidos;
@@ -31,5 +33,10 @@ public class Opuesto {
     
     public void setBloqueos_fallidos(int bloqueos_fallidos) {
         this.bloqueos_fallidos = bloqueos_fallidos;
+    }
+
+    @Override
+    public String toString() {
+        return "Opuesto - " + nombre + " - " + efectividad;
     }
 }

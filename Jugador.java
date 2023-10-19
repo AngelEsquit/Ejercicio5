@@ -62,4 +62,9 @@ public class Jugador {
     public void setEfectividad(float efectividad) {
         this.efectividad = efectividad;
     }
+
+    @Override
+    public String toString() {
+        return "Jugador - " + nombre + " - " + efectividad;
+    }
 }   

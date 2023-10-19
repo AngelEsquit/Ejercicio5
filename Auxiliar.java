@@ -1,9 +1,11 @@
-public class Auxiliar {
+public class Auxiliar extends Jugador {
     private int ataques;
     private int bloqueos_efectivos;
     private int bloqueos_fallidos;
-    
-    public Auxiliar(int ataques, int bloqueos_efectivos, int bloqueos_fallidos) {
+
+    public Auxiliar(String nombre, String pais, int errores, int aces, int total_servicios, float efectividad,
+            int ataques, int bloqueos_efectivos, int bloqueos_fallidos) {
+        super(nombre, pais, errores, aces, total_servicios, efectividad);
         this.ataques = ataques;
         this.bloqueos_efectivos = bloqueos_efectivos;
         this.bloqueos_fallidos = bloqueos_fallidos;
@@ -31,5 +33,10 @@ public class Auxiliar {
 
     public void setBloqueos_fallidos(int bloqueos_fallidos) {
         this.bloqueos_fallidos = bloqueos_fallidos;
+    }
+
+    @Override
+    public String toString() {
+        return "Auxiliar - " + nombre + " - " + efectividad;
     }
 }

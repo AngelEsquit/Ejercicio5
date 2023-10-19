@@ -14,4 +14,9 @@ public class Libero extends Jugador {
     public void setRecibos(int recibos) {
         this.recibos = recibos;
     }
+
+    @Override
+    public String toString() {
+        return "Líbero - " + nombre + " - " + efectividad;
+    }
 }
