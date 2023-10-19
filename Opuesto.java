@@ -1,8 +1,10 @@
 public class Opuesto extends Jugador {
+    // Creación de los atributos
     private int ataques;
     private int bloqueos_efectivos;
     private int bloqueos_fallidos;
 
+    // Constructor
     public Opuesto(String nombre, String pais, int errores, int aces, int total_servicios, float efectividad,
             int ataques, int bloqueos_efectivos, int bloqueos_fallidos) {
         super(nombre, pais, errores, aces, total_servicios, efectividad);
@@ -11,6 +13,7 @@ public class Opuesto extends Jugador {
         this.bloqueos_fallidos = bloqueos_fallidos;
     }
 
+    // Getters y setters
     public int getAtaques() {
         return ataques;
     }
@@ -35,6 +38,7 @@ public class Opuesto extends Jugador {
         this.bloqueos_fallidos = bloqueos_fallidos;
     }
 
+    // toString personalizado para clase hija
     @Override
     public String toString() {
         return nombre + " - Opuesto - " + "Efectividad: " + efectividad;

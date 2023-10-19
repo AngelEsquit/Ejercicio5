@@ -33,7 +33,7 @@ public class Driver {
         int recibos = 0;
         float efectividad = 1;
 
-
+        // Variables para guardar los datos en CSV
         Jugador jugador;
         Libero libero;
         Opuesto opuesto;
@@ -43,7 +43,7 @@ public class Driver {
         // Variable para saltar la primera fila de encabezados
         boolean primera_fila = true;
 
-        String csvFilePath = "Jugadores.csv";
+        String csvFilePath = "Jugadores.csv"; // Establecer el archivo CSV
         try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) { // Lector de CSV
             String line;
             while ((line = csvReader.readLine()) != null) {
@@ -56,7 +56,7 @@ public class Driver {
                 for (String datos : data) {
                     conteo += 1;
 
-                    if (!datos.equals("-") || datos.equals("0")) {
+                    if (!datos.equals("-") || datos.equals("0")) { // Identificación y separación de los datos por columna
                         switch (conteo) {
                             case 0: // Nombre
                                 nombre = datos;
@@ -103,7 +103,7 @@ public class Driver {
                     }
                 }
 
-                switch (posicion.toLowerCase()) { // Crear a los jugadores del CSV
+                switch (posicion.toLowerCase()) { // Crear a los jugadores leidos en el CSV
                     case "auxiliar":
                         efectividad = ((((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios);
                         jugadores.add(new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
@@ -134,7 +134,7 @@ public class Driver {
         while (salir) { // Ciclo principal del programa
             printMenu();
 
-            try {
+            try { // Try para proteger el menú
                 opcion = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException e) {
@@ -143,7 +143,7 @@ public class Driver {
                 scanner.nextLine();
             }
 
-            switch (opcion) {
+            switch (opcion) { // Opciones del menú
                 case 1: // Lista de jugadores inscritos
                     listaJugadores(jugadores);
                     System.out.println("");
@@ -159,16 +159,18 @@ public class Driver {
                     posicion = posicionJugador(scanner);
                     jugador = preguntasDatos(scanner, posicion);
                     jugadores.add(jugador);
+                    // Ordenar jugadores por efectividad
                     Comparator<Jugador> comparadorEfectividad = Comparator.comparing(Jugador::getEfectividad);
                     Collections.sort(jugadores, Collections.reverseOrder(comparadorEfectividad)); // Ordenar la lista de jugadores por efectividad
                     break;
                 case 5: // Salir
-                    String csvFilePath2 = "datos.csv"; // Ruta del archivo CSV
+                    String csvFilePath2 = "datos.csv"; // Establecer el archivo CSV
 
                     try (FileWriter writer = new FileWriter(csvFilePath2)) {
                         writer.append("nombre;posicion;pais;errores;aces;total_servicios;ataques;bloqueos_efectivos;bloqueos_fallidos;pases;fintas;recibos;efectividad\n"); // Escribir encabezados
 
-                        for (Jugador jugadorG : jugadores) {
+                        for (Jugador jugadorG : jugadores) { // Escribir cada jugador en una nueva fila
+                            // Identificar el tipo de cada jugador
                             if (jugadorG instanceof Libero) {
                                 libero = (Libero) jugadorG;
                                 writer.append(libero.getNombre() + ";libero;" + libero.getPais() + ";" + libero.getErrores() + ";" + libero.getAces() + ";" + libero.getTotal_servicios() + ";-;-;-;-;-;" + libero.getRecibos() + ";" + libero.getEfectividad() + "\n");
@@ -193,7 +195,7 @@ public class Driver {
                         System.out.println("Datos guardados en " + csvFilePath2);
                     }
                     
-                    catch (IOException e) {
+                    catch (IOException e) { // Catch para errores al guardar el CSV
                         System.err.println("Error al guardar el archivo CSV: " + e.getMessage());
                     }
 
