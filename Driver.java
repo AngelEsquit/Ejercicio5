@@ -13,14 +13,45 @@ public class Driver {
         Scanner scanner = new Scanner(System.in);
         int salir = 0;
         int opcion = 0;
+        int conteo = 0;
 
-        String csvFilePath = "/Jugadores.csv";
+        String csvFilePath = "Jugadores.csv";
         try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             while ((line = csvReader.readLine()) != null) {
-                String[] data = line.split(",");
-                for (String datum : data) {
-                    System.out.print(datum + " ");
+                String[] data = line.split(";");
+                for (String datos : data) {
+                    conteo += 1;
+
+                    switch (opcion) {
+                        case 0: // Nombre
+                            break;
+                        case 1: // Posicion
+                            break;
+                        case 2: // Pais
+                            break;
+                        case 3: // Errores
+                            break;
+                        case 4: // Aces
+                            break;
+                        case 5: // Total servicios
+                            break;
+                        case 6: // Ataques
+                            break;
+                        case 7: // Bloqueos efectivos
+                            break;
+                        case 8: // Bloqueos fallidos
+                            break;
+                        case 9: // Pases
+                            break;
+                        case 10: // Fintas
+                            break;
+                        case 11: // Recibos
+                            break;
+                        default:
+                            break;
+                    }
+                    System.out.print(datos + " ");
                 }
                 System.out.println(); // Salto de línea para cada fila
             }
