@@ -15,6 +15,20 @@ public class Driver {
         int opcion = 0;
         int conteo = 0;
 
+        String nombre;
+        String posicion;
+        String pais;
+        int errores;
+        int aces;
+        int total_servicios;
+        int ataques;
+        int bloqueos_efectivos;
+        int bloqueos_fallidos;
+        int pases;
+        int fintas;
+        int recibos;
+        float efectividad;
+
         String csvFilePath = "Jugadores.csv";
         try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -23,37 +37,53 @@ public class Driver {
                 for (String datos : data) {
                     conteo += 1;
 
-                    switch (opcion) {
-                        case 0: // Nombre
-                            break;
-                        case 1: // Posicion
-                            break;
-                        case 2: // Pais
-                            break;
-                        case 3: // Errores
-                            break;
-                        case 4: // Aces
-                            break;
-                        case 5: // Total servicios
-                            break;
-                        case 6: // Ataques
-                            break;
-                        case 7: // Bloqueos efectivos
-                            break;
-                        case 8: // Bloqueos fallidos
-                            break;
-                        case 9: // Pases
-                            break;
-                        case 10: // Fintas
-                            break;
-                        case 11: // Recibos
-                            break;
-                        default:
-                            break;
+                    if (!datos.equals("-")) {
+                        switch (conteo) {
+                            case 0: // Nombre
+                                nombre = datos;
+                                break;
+                            case 1: // Posicion
+                                posicion = datos;
+                                break;
+                            case 2: // Pais
+                                pais = datos;
+                                break;
+                            case 3: // Errores
+                                errores = Integer.parseInt(datos);
+                                break;
+                            case 4: // Aces
+                                aces = Integer.parseInt(datos);
+                                break;
+                            case 5: // Total servicios
+                                total_servicios = Integer.parseInt(datos);
+                                break;
+                            case 6: // Ataques
+                                ataques = Integer.parseInt(datos);
+                                break;
+                            case 7: // Bloqueos efectivos
+                                bloqueos_efectivos = Integer.parseInt(datos);
+                                break;
+                            case 8: // Bloqueos fallidos
+                                bloqueos_fallidos = Integer.parseInt(datos);
+                                break;
+                            case 9: // Pases
+                                pases = Integer.parseInt(datos);
+                                break;
+                            case 10: // Fintas
+                                fintas = Integer.parseInt(datos);
+                                break;
+                            case 11: // Recibos
+                                recibos = Integer.parseInt(datos);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        System.out.print(datos + " ");
                     }
-                    System.out.print(datos + " ");
                 }
                 System.out.println(); // Salto de línea para cada fila
+                conteo = 0;
             }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo CSV: " + e.getMessage());
