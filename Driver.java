@@ -11,23 +11,24 @@ public class Driver {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Jugador> jugadores = new ArrayList<>();
         int salir = 0;
         int opcion = 0;
         int conteo = 0;
 
-        String nombre;
-        String posicion;
-        String pais;
-        int errores;
-        int aces;
-        int total_servicios;
-        int ataques;
-        int bloqueos_efectivos;
-        int bloqueos_fallidos;
-        int pases;
-        int fintas;
-        int recibos;
-        float efectividad;
+        String nombre = "";
+        String posicion = "";
+        String pais = "";
+        int errores = 0;
+        int aces = 0;
+        int total_servicios = 0;
+        int ataques = 0;
+        int bloqueos_efectivos = 0;
+        int bloqueos_fallidos = 0;
+        int pases = 0;
+        int fintas = 0;
+        int recibos = 0;
+        float efectividad = 0;
 
         String csvFilePath = "Jugadores.csv";
         try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -78,10 +79,29 @@ public class Driver {
                             default:
                                 break;
                         }
-
                         System.out.print(datos + " ");
                     }
+
+                    switch (posicion) {
+                        case "auxiliar":
+                            efectividad = (((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios;
+                            new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos);
+                            break;
+                        case "pasador":
+                            efectividad = (((pases + fintas - errores) * 100) / (pases + fintas + errores)) + (aces * 100) / total_servicios;
+                            new Pasador(nombre, pais, errores, aces, total_servicios, efectividad, pases, fintas);
+                            break;
+                        case "libero":
+                            efectividad = (((recibos - errores) * 100) / (recibos + errores)) + (aces * 100) / total_servicios;
+                            new Libero(nombre, pais, errores, aces, total_servicios, efectividad, recibos);
+                            break;
+                        case "opuesto":
+                            efectividad = (((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios;
+                            new Opuesto(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos);
+                            break;
+                    }
                 }
+
                 System.out.println(); // Salto de línea para cada fila
                 conteo = 0;
             }
