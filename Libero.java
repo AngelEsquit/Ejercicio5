@@ -3,7 +3,7 @@ public class Libero extends Jugador {
 
     public Libero(String nombre, String pais, int errores, int aces, int total_servicios, float efectividad,
             int recibos) {
-        super(nombre, pais, errores, aces, total_servicios, efectividad);
+        super(nombre, pais, errores, aces, total_servicios);
         this.recibos = recibos;
     }
 
