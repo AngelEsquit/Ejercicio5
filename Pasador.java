@@ -27,6 +27,6 @@ public class Pasador extends Jugador {
 
     @Override
     public String toString() {
-        return "Pasador - " + nombre + " - " + efectividad;
+        return nombre + " - Pasador - " + "Efectividad: " + efectividad;
     }
 }

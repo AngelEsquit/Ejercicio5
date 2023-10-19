@@ -37,6 +37,6 @@ public class Opuesto extends Jugador {
 
     @Override
     public String toString() {
-        return "Opuesto - " + nombre + " - " + efectividad;
+        return nombre + " - Opuesto - " + "Efectividad: " + efectividad;
     }
 }

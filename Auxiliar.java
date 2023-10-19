@@ -37,6 +37,6 @@ public class Auxiliar extends Jugador {
 
     @Override
     public String toString() {
-        return "Auxiliar - " + nombre + " - " + efectividad;
+        return nombre + " - Auxiliar - " + "Efectividad: " + efectividad;
     }
 }

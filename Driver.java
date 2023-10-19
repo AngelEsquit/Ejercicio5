@@ -12,9 +12,9 @@ public class Driver {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        int salir = 0;
+        boolean salir = true;
         int opcion = 0;
-        int conteo = 0;
+        int conteo = -1;
 
         String nombre = "";
         String posicion = "";
@@ -29,11 +29,18 @@ public class Driver {
         int fintas = 0;
         int recibos = 0;
         float efectividad = 0;
+        
+        boolean primera_fila = true;
 
         String csvFilePath = "Jugadores.csv";
         try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             while ((line = csvReader.readLine()) != null) {
+                if (primera_fila) {
+                    primera_fila = false;
+                    continue;
+                }
+
                 String[] data = line.split(";");
                 for (String datos : data) {
                     conteo += 1;
@@ -79,27 +86,26 @@ public class Driver {
                             default:
                                 break;
                         }
-                        System.out.print(datos + " ");
                     }
+                }
 
-                    switch (posicion) {
-                        case "auxiliar":
-                            efectividad = (((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios;
-                            jugadores.add(new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
-                            break;
-                        case "pasador":
-                            efectividad = (((pases + fintas - errores) * 100) / (pases + fintas + errores)) + (aces * 100) / total_servicios;
-                            jugadores.add(new Pasador(nombre, pais, errores, aces, total_servicios, efectividad, pases, fintas));
-                            break;
-                        case "libero":
-                            efectividad = (((recibos - errores) * 100) / (recibos + errores)) + (aces * 100) / total_servicios;
-                            jugadores.add(new Libero(nombre, pais, errores, aces, total_servicios, efectividad, recibos));
-                            break;
-                        case "opuesto":
-                            efectividad = (((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios;
-                            jugadores.add(new Opuesto(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
-                            break;
-                    }
+                switch (posicion.toLowerCase()) {
+                    case "auxiliar":
+                        efectividad = ((((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios);
+                        jugadores.add(new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
+                        break;
+                    case "pasador":
+                        efectividad = ((((pases + fintas - errores) * 100) / (pases + fintas + errores)) + (aces * 100) / total_servicios);
+                        jugadores.add(new Pasador(nombre, pais, errores, aces, total_servicios, efectividad, pases, fintas));
+                        break;
+                    case "libero":
+                        efectividad = ((((recibos - errores) * 100) / (recibos + errores)) + (aces * 100) / total_servicios);
+                        jugadores.add(new Libero(nombre, pais, errores, aces, total_servicios, efectividad, recibos));
+                        break;
+                    case "opuesto":
+                        efectividad = ((((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios);
+                        jugadores.add(new Opuesto(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos));
+                        break;
                 }
 
                 System.out.println(); // Salto de línea para cada fila
@@ -109,7 +115,7 @@ public class Driver {
             System.err.println("Error al leer el archivo CSV: " + e.getMessage());
         }
 
-        while (salir != 0) {
+        while (salir) {
             printMenu();
 
             try {
@@ -123,6 +129,7 @@ public class Driver {
 
             switch (opcion) {
                 case 1:
+                    listaJugadores(jugadores);
                     break;
                 case 2:
                     break;
@@ -130,10 +137,7 @@ public class Driver {
                     System.out.println("// Lógica para la opción 3");
                     break;
                 case 4:
-                    System.out.println("// Lógica para la opción 4");
-                    break;
-                case 5:
-                    salir = 0;
+                    salir = false;
                     System.out.println("// Salir del bucle");
                     break;
                 case 0:
@@ -159,5 +163,13 @@ public class Driver {
         System.out.println("3: Mostrar la cantidad de pasadores con más de un 80% de efectividad");
         System.out.println("4: Salir");
         System.out.println("");
+    }
+
+    public static void listaJugadores(ArrayList<Jugador> jugadores) {
+        int n = 1;
+        System.out.println("");
+        for (Jugador jugador : jugadores) {
+            System.out.println(n + ": " + jugador.toString());
+        }
     }
 }

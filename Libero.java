@@ -17,6 +17,6 @@ public class Libero extends Jugador {
 
     @Override
     public String toString() {
-        return "Líbero - " + nombre + " - " + efectividad;
+        return nombre + " - Líbero - " + "Efectividad: " + efectividad;
     }
 }
