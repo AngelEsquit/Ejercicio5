@@ -1,3 +1,9 @@
-nombre;posicion;pais;errores;aces;total_servicios;ataques;bloqueos_efectivos;bloqueos_fallidos;pases;fintas;recibos
-angel;libero;guatemala;50;36;954;-;-;-;-;-;10
-diego;libero;mexico;10;20;6;-;-;-;-;-;40
+nombre;posicion;pais;errores;aces;total_servicios;ataques;bloqueos_efectivos;bloqueos_fallidos;pases;fintas;recibos;efectividad
+angel;libero;guatemala;50;36;954;-;-;-;-;-;10;561
+diego;libero;mexico;10;20;6;-;-;-;-;-;40;64
+angel;pasador;guatemala;50;36;95;-;-;-;-;-;10;456
+angel;pasador;guatemala;53;36;4;-;-;-;-;-;10;456
+diego;libero;mexico;40;2;8;-;-;-;-;-;32;62
+pedro;pasador;guatemala;83;36;42;-;-;-;-;-;101;456
+pedro;auxiliar;guatemala;83;36;42;-;-;-;-;-;101;78
+pedro;opuesto;guatemala;83;36;42;-;-;-;-;-;101;9
