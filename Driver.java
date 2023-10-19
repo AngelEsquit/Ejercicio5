@@ -56,7 +56,7 @@ public class Driver {
                 for (String datos : data) {
                     conteo += 1;
 
-                    if (!datos.equals("-")) {
+                    if (!datos.equals("-") || datos.equals("0")) {
                         switch (conteo) {
                             case 0: // Nombre
                                 nombre = datos;
@@ -66,7 +66,6 @@ public class Driver {
                                 break;
                             case 2: // Pais
                                 pais = datos;
-                                System.out.println(pais);
                                 break;
                             case 3: // Errores
                                 errores = Integer.parseInt(datos);
@@ -147,6 +146,7 @@ public class Driver {
             switch (opcion) {
                 case 1: // Lista de jugadores inscritos
                     listaJugadores(jugadores);
+                    System.out.println("");
                     break;
                 case 2: // Mejores 3 líberos
                     mejoresLiberos(jugadores);
@@ -155,9 +155,12 @@ public class Driver {
                     cantidadPasadores80(jugadores);
                     break;
                 case 4: // Inscribir un jugador
+                    System.out.println("");
                     posicion = posicionJugador(scanner);
                     jugador = preguntasDatos(scanner, posicion);
                     jugadores.add(jugador);
+                    Comparator<Jugador> comparadorEfectividad = Comparator.comparing(Jugador::getEfectividad);
+                    Collections.sort(jugadores, Collections.reverseOrder(comparadorEfectividad)); // Ordenar la lista de jugadores por efectividad
                     break;
                 case 5: // Salir
                     String csvFilePath2 = "datos.csv"; // Ruta del archivo CSV
@@ -185,12 +188,8 @@ public class Driver {
                                 auxiliar = (Auxiliar) jugadorG;
                                 writer.append(auxiliar.getNombre() + ";auxiliar;" + auxiliar.getPais() + ";" + auxiliar.getErrores() + ";" + auxiliar.getAces() + ";" + auxiliar.getTotal_servicios() + ";" + auxiliar.getAtaques()+ ";" + auxiliar.getBloqueos_efectivos() + ";" + auxiliar.getBloqueos_fallidos() + ";-;-;-;" + auxiliar.getEfectividad() + "\n");
                             }
-                        }
-
-                        writer.append("Juan,25,Barcelona\n");
-                        writer.append("María,30,Madrid\n");
-                        writer.append("Pedro,22,Valencia\n");
-            
+                        }     
+                        System.out.println("");       
                         System.out.println("Datos guardados en " + csvFilePath2);
                     }
                     
@@ -200,6 +199,7 @@ public class Driver {
 
                     salir = false;
                     System.out.println("Hasta pronto :)");
+                    System.out.println("");
                     break;
                 case 0:
                     continue;
@@ -288,51 +288,84 @@ public class Driver {
         
         switch (posicion.toLowerCase()) {
             case "libero":
+                System.out.println("");
                 nombre = nombreJugador(scanner);
+                System.out.println("");
                 posicionN = "libero";
                 pais = paisJugador(scanner);
+                System.out.println("");
                 errores = erroresJugador(scanner);
+                System.out.println("");
                 aces = acesJugador(scanner);
+                System.out.println("");
                 total_servicios = totalServiciosJugador(scanner);
+                System.out.println("");
                 recibos = recibosJugador(scanner);
+                System.out.println("");
                 efectividad = ((((recibos - errores) * 100) / (recibos + errores)) + (aces * 100) / total_servicios);
                 jugador = new Libero(nombre, pais, errores, aces, total_servicios, efectividad, recibos);
                 break;
             case "opuesto":
+                System.out.println("");
                 nombre = nombreJugador(scanner);
                 posicionN = "opuesto";
+                System.out.println("");
                 pais = paisJugador(scanner);
+                System.out.println("");
                 errores = erroresJugador(scanner);
+                System.out.println("");
                 aces = acesJugador(scanner);
+                System.out.println("");
                 total_servicios = totalServiciosJugador(scanner);
+                System.out.println("");
                 ataques = ataquesJugador(scanner);
+                System.out.println("");
                 bloqueos_efectivos = bloqueosEfectivosJugador(scanner);
+                System.out.println("");
                 bloqueos_fallidos = bloqueosFallidosJugador(scanner);
+                System.out.println("");
                 efectividad = ((((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios);
                 jugador = new Opuesto(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos);
                 break;
             case "pasador":
+                System.out.println("");
                 nombre = nombreJugador(scanner);
+                System.out.println("");
                 posicionN = "pasador";
                 pais = paisJugador(scanner);
+                System.out.println("");
                 errores = erroresJugador(scanner);
+                System.out.println("");
                 aces = acesJugador(scanner);
+                System.out.println("");
                 total_servicios = totalServiciosJugador(scanner);
+                System.out.println("");
                 pases = pasesJugador(scanner);
+                System.out.println("");
                 fintas = fintasJugador(scanner);
+                System.out.println("");
                 efectividad = ((((pases + fintas - errores) * 100) / (pases + fintas + errores)) + (aces * 100) / total_servicios);
                 jugador = new Pasador(nombre, pais, errores, aces, total_servicios, efectividad, pases, fintas);
                 break;
             case "auxiliar":
+                System.out.println("");
                 nombre = nombreJugador(scanner);
+                System.out.println("");
                 posicionN = "auxiliar";
                 pais = paisJugador(scanner);
+                System.out.println("");
                 errores = erroresJugador(scanner);
+                System.out.println("");
                 aces = acesJugador(scanner);
+                System.out.println("");
                 total_servicios = totalServiciosJugador(scanner);
+                System.out.println("");
                 ataques = ataquesJugador(scanner);
+                System.out.println("");
                 bloqueos_efectivos = bloqueosEfectivosJugador(scanner);
+                System.out.println("");
                 bloqueos_fallidos = bloqueosFallidosJugador(scanner);
+                System.out.println("");
                 efectividad = ((((ataques + bloqueos_efectivos - bloqueos_fallidos - errores) * 100) / (ataques + bloqueos_efectivos + bloqueos_fallidos + errores)) + (aces * 100) / total_servicios);
                 jugador = new Auxiliar(nombre, pais, errores, aces, total_servicios, efectividad, ataques, bloqueos_efectivos, bloqueos_fallidos);
                 break;
