@@ -164,7 +164,7 @@ public class Driver {
                     Collections.sort(jugadores, Collections.reverseOrder(comparadorEfectividad)); // Ordenar la lista de jugadores por efectividad
                     break;
                 case 5: // Salir
-                    String csvFilePath2 = "datos.csv"; // Establecer el archivo CSV
+                    String csvFilePath2 = "Jugadores.csv"; // Establecer el archivo CSV
 
                     try (FileWriter writer = new FileWriter(csvFilePath2)) {
                         writer.append("nombre;posicion;pais;errores;aces;total_servicios;ataques;bloqueos_efectivos;bloqueos_fallidos;pases;fintas;recibos;efectividad\n"); // Escribir encabezados
